@@ -1,0 +1,22 @@
+{
+  "name": "practice_test_software",
+  "version": "1.0.0",
+  "description": "this repo is to practice the things seen in the software testing class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseAcevesG/Practice_test_software.git"
+  },
+  "author": "joseAcevesG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joseAcevesG/Practice_test_software/issues"
+  },
+  "homepage": "https://github.com/joseAcevesG/Practice_test_software#readme",
+  "devDependencies": {
+    "danger": "^11.3.1"
+  }
+}
