@@ -1,6 +1,10 @@
----
-# template source: https://github.com/bretfisher/super-linter-workflow/blob/main/templates/call-super-linter.yaml
-name: Lint Code Base
+# docker run \
+# -e ACTIONS_RUNNER_DEBUG=true \
+# -e RUN_LOCAL=true \
+# -v /path/to/local/codebase:/tmp/lint \
+# ghcr.io/super-linter/super-linter:latest
+
+name: Lint all the codes
 
 on:
     # run anytime a PR is merged to main or a direct push to main
@@ -16,27 +20,44 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    call-super-linter:
-        name: Call Super-Linter
+    super-lint:
+        name: Super-Linter
 
-        permissions:
-            contents: read # clone the repo to lint
-            statuses: write # read/write to repo custom statuses
+        runs-on: ubuntu-latest
 
-        ### use Reusable Workflows to call my workflow remotely
-        ### https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
-        ### you can also call workflows from inside the same repo via file path
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-        # FIXME: customize uri to point to your own reusable linter repository
-        uses: bretfisher/super-linter-workflow/.github/workflows/reusable-super-linter.yaml@main
+            - name: Set DEFAULT_BRANCH to PR target
+              if: ${{ github.base_ref != '' }}
+              run: |
+                  # shellcheck disable=2086
+                  echo "DEFAULT_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+                  echo "this is a PR branch. Let's only lint the files that are changed against the target branch '${{ github.base_ref }}'"
 
-        ### Optional settings examples
+            - name: Set DEFAULT_BRANCH to current branch
+              if: ${{ github.base_ref == '' }}
+              run: |
+                  # shellcheck disable=2086
+                  echo "DEFAULT_BRANCH=$(echo '${{ github.ref }}' | sed 's/refs\/heads\///')" >> $GITHUB_ENV
+                  echo "this is just a branch push, not a PR."
 
-        # with:
-        ### For a DevOps-focused repository. Prevents some code-language linters from running
-        ### defaults to false
-        # devops-only: false
+            - name: Are we linting all files?
+              run: |
+                  echo VALIDATE_ALL_CODEBASE=${{ !contains(github.event_name, 'pull_request') }}
 
-        ### A regex to exclude files from linting
-        ### defaults to empty
-        # filter-regex-exclude: html/.*
+            - name: Lint Code Base
+              uses: super-linter/super-linter/slim@v6.0.0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
+                  DEFAULT_BRANCH: ${{ env.DEFAULT_BRANCH }}
+                  VALIDATE_ALL_CODEBASE: ${{ !contains(github.event_name, 'pull_request') }}
+
+                  VALIDATE_DOCKERFILE: false
+                  VALIDATE_JSCPD: false
+                  VALIDATE_SHELL_SHFMT: false
+                  VALIDATE_EDITORCONFIG: false
+                  KUBERNETES_KUBEVAL_OPTIONS: --ignore-missing-schemas --schema-location https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/
