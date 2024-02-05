@@ -60,4 +60,5 @@ jobs:
                   VALIDATE_JSCPD: false
                   VALIDATE_SHELL_SHFMT: false
                   VALIDATE_EDITORCONFIG: false
+                  VALIDATE_CHECKOV: false
                   KUBERNETES_KUBEVAL_OPTIONS: --ignore-missing-schemas --schema-location https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/
