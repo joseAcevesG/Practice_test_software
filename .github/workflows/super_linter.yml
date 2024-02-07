@@ -7,10 +7,6 @@
 name: Lint all the codes
 
 on:
-    # run anytime a PR is merged to main or a direct push to main
-    push:
-        branches: [main]
-
     # run on any push to a PR branch
     pull_request:
 
