@@ -1,5 +1,11 @@
 import unittest
-from whilte_box import check_loan_eligibility, calculate_shipping_cost, grade_quiz, authenticate_user
+from whilte_box import (
+    check_loan_eligibility,
+    calculate_shipping_cost,
+    grade_quiz,
+    authenticate_user,
+)
+
 
 class TestCheckLoanEligibility(unittest.TestCase):
     def test_not_eligible(self):
@@ -18,7 +24,7 @@ class TestCheckLoanEligibility(unittest.TestCase):
         result = check_loan_eligibility(70000, 800)
         self.assertEqual(result, "Premium Loan")
 
-    
+
 class TestCalculateShippingCost(unittest.TestCase):
     def test_small_package(self):
         result = calculate_shipping_cost(1, 10, 10, 10)
@@ -60,5 +66,6 @@ class TestAuthenticateUser(unittest.TestCase):
         result = authenticate_user("user", "pass")
         self.assertEqual(result, "Invalid")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
