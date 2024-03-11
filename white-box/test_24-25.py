@@ -16,9 +16,7 @@ class TestUserAuthentication(unittest.TestCase):
 
     def test_invalid_login(self):
         self.user_auth.state = "Logged In"
-        self.assertEqual(
-            self.user_auth.login(), "Invalid operation in current state"
-        )
+        self.assertEqual(self.user_auth.login(), "Invalid operation in current state")
 
     def test_logout(self):
         self.user_auth.state = "Logged In"
@@ -26,9 +24,7 @@ class TestUserAuthentication(unittest.TestCase):
         self.assertEqual(self.user_auth.state, "Logged Out")
 
     def test_invalid_logout(self):
-        self.assertEqual(
-            self.user_auth.logout(), "Invalid operation in current state"
-        )
+        self.assertEqual(self.user_auth.logout(), "Invalid operation in current state")
 
 
 class TestDocumentEditingSystem(unittest.TestCase):
@@ -39,9 +35,7 @@ class TestDocumentEditingSystem(unittest.TestCase):
         self.assertEqual(self.doc_edit.state, "Editing")
 
     def test_save_document(self):
-        self.assertEqual(
-            self.doc_edit.save_document(), "Document saved successfully"
-        )
+        self.assertEqual(self.doc_edit.save_document(), "Document saved successfully")
         self.assertEqual(self.doc_edit.state, "Saved")
 
     def test_invalid_save_document(self):
