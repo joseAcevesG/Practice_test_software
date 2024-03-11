@@ -1,6 +1,6 @@
 import unittest
 
-from whilte_box import VendingMachine, TrafficLight
+from whilte_box import TrafficLight, VendingMachine
 
 
 class TestVendingMachine(unittest.TestCase):
