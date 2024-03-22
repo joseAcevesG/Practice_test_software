@@ -10,6 +10,7 @@ from white_box_homework.white_box import (
     BankingSystem,
     DocumentEditingSystem,
     ElevatorSystem,
+    Product,
     ShoppingCart,
     TrafficLight,
     UserAuthentication,
@@ -35,7 +36,6 @@ from white_box_homework.white_box import (
     validate_password,
     validate_url,
     verify_age,
-    Product
 )
 
 
@@ -783,12 +783,13 @@ class TestBankingSystem(unittest.TestCase):
         second_print_output = output_lines[1]
         self.assertEqual(second_print_output, "Insufficient funds.")
 
+
 # 28
 class TestShoppingCart(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cart = ShoppingCart()
-        cls.product=Product("Product A", 10)
+        cls.product = Product("Product A", 10)
 
     def setUp(self):
         self.cart.items.clear()
@@ -814,7 +815,7 @@ class TestShoppingCart(unittest.TestCase):
         self.cart.remove_product(self.product, 2)
         self.assertEqual(len(self.cart.items), 0)
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch("sys.stdout", new_callable=StringIO)
     def test_view_cart(self, mock_stdout):
         self.cart.add_product(self.product, 2)
         expected_output = "2 x Product A - $20\n"
