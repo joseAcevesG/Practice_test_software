@@ -251,7 +251,11 @@ def validate_url(url):
     """
     Validates URLs.
     """
-    if len(url) <= 255 and url.startswith("http://") or url.startswith("https://"):
+    if (
+        len(url) <= 255
+        and url.startswith("http://")
+        or url.startswith("https://")
+    ):
         return "Valid URL"
 
     return "Invalid URL"
@@ -310,7 +314,12 @@ def calculate_shipping_cost(weight, length, width, height):
     if weight <= 1 and length <= 10 and width <= 10 and height <= 10:
         return 5
 
-    if 1 < weight <= 5 and 11 <= length <= 30 and 11 <= width <= 30 and 11 <= height <= 30:
+    if (
+        1 < weight <= 5
+        and 11 <= length <= 30
+        and 11 <= width <= 30
+        and 11 <= height <= 30
+    ):
         return 10
 
     return 20
@@ -548,7 +557,9 @@ class BankAccount:  # pylint: disable=too-few-public-methods
         """
         Function to display the account details.
         """
-        print(f"The account {self.account_number} has a balance of {self.balance}")
+        print(
+            f"The account {self.account_number} has a balance of {self.balance}"
+        )
 
 
 class BankingSystem:
@@ -678,6 +689,8 @@ class ShoppingCart:
         """
         Function to checkout the items from the shopping cart.
         """
-        total = sum(item["product"].price * item["quantity"] for item in self.items)
+        total = sum(
+            item["product"].price * item["quantity"] for item in self.items
+        )
         print(f"Total: ${total}")
         print("Checkout completed. Thank you for shopping!")
