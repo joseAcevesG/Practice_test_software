@@ -165,16 +165,12 @@ class TestCalculateItemsShippingCost(unittest.TestCase):
 class TestValidateLogin(unittest.TestCase):
     def test_valid_credentials(self):
         """Test that it correctly validates valid login credentials"""
-        self.assertEqual(
-            validate_login("johndoe", "password123"), "Login Successful"
-        )
+        self.assertEqual(validate_login("johndoe", "password123"), "Login Successful")
 
     def test_invalid_username_length(self):
         """Test that it correctly identifies an invalid username due to length"""
         self.assertEqual(
-            validate_login(
-                "johndoe123456789054354543643643643643643", "password123"
-            ),
+            validate_login("johndoe123456789054354543643643643643643", "password123"),
             "Login Failed",
         )
 
@@ -671,9 +667,7 @@ class TestElevatorSystem(unittest.TestCase):
     def test_invalid_operation_move_up(self):
         """Test that an invalid operation is not allowed in the current state"""
         self.elevator.move_up()
-        self.assertEqual(
-            self.elevator.move_up(), "Invalid operation in current state"
-        )
+        self.assertEqual(self.elevator.move_up(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Up")
         self.assertEqual(
             self.elevator.move_down(), "Invalid operation in current state"
@@ -687,9 +681,7 @@ class TestElevatorSystem(unittest.TestCase):
             self.elevator.move_down(), "Invalid operation in current state"
         )
         self.assertEqual(self.elevator.state, "Moving Down")
-        self.assertEqual(
-            self.elevator.move_up(), "Invalid operation in current state"
-        )
+        self.assertEqual(self.elevator.move_up(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Down")
 
     def test_invalid_operation_stop(self):
@@ -773,9 +765,7 @@ class TestBankingSystem(unittest.TestCase):
         """Test that it correctly processes a scheduled money transfer"""
         self.banking_system.authenticate("user123", "pass123")
         self.assertTrue(
-            self.banking_system.transfer_money(
-                "user123", "receiver", 100, "scheduled"
-            )
+            self.banking_system.transfer_money("user123", "receiver", 100, "scheduled")
         )
 
     @patch("sys.stdout", new_callable=StringIO)
@@ -794,9 +784,7 @@ class TestBankingSystem(unittest.TestCase):
         """Test that it correctly handles insufficient funds for a money transfer"""
         self.banking_system.authenticate("user123", "pass123")
         self.assertFalse(
-            self.banking_system.transfer_money(
-                "user123", "receiver", 10000, "regular"
-            )
+            self.banking_system.transfer_money("user123", "receiver", 10000, "regular")
         )
         output_lines = mock_stdout.getvalue().strip().split("\n")
         second_print_output = output_lines[1]
