@@ -381,7 +381,7 @@ class TestCheckLoanEligibility(unittest.TestCase):
         self.assertEqual(check_loan_eligibility(60000, 600), "Secured Loan")
         self.assertEqual(check_loan_eligibility(30000, 600), "Secured Loan")
 
-    def test_secured_loan(self):
+    def test_standard_loan(self):
         """Test that it correctly identifies when the person is eligible for a secured loan"""
         self.assertEqual(check_loan_eligibility(50000, 701), "Standard Loan")
         self.assertEqual(check_loan_eligibility(60000, 740), "Standard Loan")
