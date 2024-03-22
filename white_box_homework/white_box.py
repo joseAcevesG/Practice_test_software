@@ -553,7 +553,7 @@ class BankAccount:  # pylint: disable=too-few-public-methods
         """
         Function to display the account details.
         """
-        print(f"The account {self.account_number} has a balance of {self.balance}")
+        return f"The account {self.account_number} has a balance of {self.balance}"
 
 
 class BankingSystem:
@@ -686,3 +686,4 @@ class ShoppingCart:
         total = sum(item["product"].price * item["quantity"] for item in self.items)
         print(f"Total: ${total}")
         print("Checkout completed. Thank you for shopping!")
+        return total
