@@ -4,7 +4,8 @@ import unittest
 from io import StringIO
 from unittest.mock import patch
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")  # noqa: E402
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
+# flake8: noqa
 from white_box_homework.white_box import (
     BankAccount,
     BankingSystem,
@@ -37,6 +38,8 @@ from white_box_homework.white_box import (
     validate_url,
     verify_age,
 )
+
+# flake8: noqa
 
 
 # 1
@@ -669,17 +672,13 @@ class TestElevatorSystem(unittest.TestCase):
         self.elevator.move_up()
         self.assertEqual(self.elevator.move_up(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Up")
-        self.assertEqual(
-            self.elevator.move_down(), "Invalid operation in current state"
-        )
+        self.assertEqual(self.elevator.move_down(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Up")
 
     def test_invalid_operation_move_down(self):
         """Test that an invalid operation is not allowed in the current state"""
         self.elevator.move_down()
-        self.assertEqual(
-            self.elevator.move_down(), "Invalid operation in current state"
-        )
+        self.assertEqual(self.elevator.move_down(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Down")
         self.assertEqual(self.elevator.move_up(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Down")
