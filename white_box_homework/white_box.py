@@ -251,11 +251,7 @@ def validate_url(url):
     """
     Validates URLs.
     """
-    if (
-        len(url) <= 255
-        and url.startswith("http://")
-        or url.startswith("https://")
-    ):
+    if len(url) <= 255 and url.startswith("http://") or url.startswith("https://"):
         return "Valid URL"
 
     return "Invalid URL"
@@ -557,9 +553,7 @@ class BankAccount:  # pylint: disable=too-few-public-methods
         """
         Function to display the account details.
         """
-        print(
-            f"The account {self.account_number} has a balance of {self.balance}"
-        )
+        print(f"The account {self.account_number} has a balance of {self.balance}")
 
 
 class BankingSystem:
@@ -689,8 +683,6 @@ class ShoppingCart:
         """
         Function to checkout the items from the shopping cart.
         """
-        total = sum(
-            item["product"].price * item["quantity"] for item in self.items
-        )
+        total = sum(item["product"].price * item["quantity"] for item in self.items)
         print(f"Total: ${total}")
         print("Checkout completed. Thank you for shopping!")
