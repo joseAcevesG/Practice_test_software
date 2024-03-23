@@ -672,13 +672,17 @@ class TestElevatorSystem(unittest.TestCase):
         self.elevator.move_up()
         self.assertEqual(self.elevator.move_up(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Up")
-        self.assertEqual(self.elevator.move_down(), "Invalid operation in current state")
+        self.assertEqual(
+            self.elevator.move_down(), "Invalid operation in current state"
+        )
         self.assertEqual(self.elevator.state, "Moving Up")
 
     def test_invalid_operation_move_down(self):
         """Test that an invalid operation is not allowed in the current state"""
         self.elevator.move_down()
-        self.assertEqual(self.elevator.move_down(), "Invalid operation in current state")
+        self.assertEqual(
+            self.elevator.move_down(), "Invalid operation in current state"
+        )
         self.assertEqual(self.elevator.state, "Moving Down")
         self.assertEqual(self.elevator.move_up(), "Invalid operation in current state")
         self.assertEqual(self.elevator.state, "Moving Down")
