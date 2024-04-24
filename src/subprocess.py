@@ -1,5 +1,6 @@
 import subprocess
 
+
 def execute_command(command):
     try:
         result = subprocess.run(command, capture_output=True, text=True)
